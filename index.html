@@ -16,45 +16,77 @@
           } else {
             return 'scissors';
           }
-        }
+      }
+      
+      function getUserRPS () {
+        selection = prompt('Type rock, paper, or scissors');
+        return selection.toLowerCase();
+      }
 
-      function playRound(computerSelection) {
-        // declare variables to compare in game logic
-        computerSelection = computerPlay();
-        let playerSelection = 'ROCK' //prompt('Type rock, paper, or scissors');
+      function playRound (playerSelection, computerSelection) {
 
-        // set player entered value to lowercase for accurate compare
-        playerSelection = playerSelection.toLowerCase();
+        // execute callbacks and set as new local variables to be reused throughout game logic
+        player = playerSelection();
+        computer = computerSelection()
 
-        // TEMPORARY for checking that game logic is working properly
-        console.log(computerSelection);
+        // enable below console.log's to evaluate/confirm game logic
+        // console.log(player);
+        // console.log(computer);
 
         // game logic
-        if (computerSelection === playerSelection) {
-          return 'It\'s a tie!';
-        } else if (playerSelection === 'rock') {
-          if (computerSelection === 'paper') {
-            return 'You lose! Paper beats Rock!';
+        // alert player to win, loss, or tie
+        // return score indicator of 1, -1, or 0 (win, loss, or tie)        
+        if (computer === player) {
+          alert('It\'s a tie!');
+          return 0;
+        } else if (player === 'rock') {
+          if (computer === 'paper') {
+            alert('You lose! Paper beats Rock!');
+            return -1;
             } else {
-              return 'You win! Rock beats Scissors!';
+              alert('You win! Rock beats Scissors!');
+              return 1;
               }
-          } else if (playerSelection === 'paper') {
-            if (computerSelection === 'scissors') {
-              return 'You lose! Scissors beats Paper!';
+          } else if (player === 'paper') {
+            if (computer === 'scissors') {
+              alert('You lose! Scissors beats Paper!');
+              return -1;
               } else {
-                return 'You win! Paper beats Rock!';
+                alert('You win! Paper beats Rock!');
+                return 1;
                 }
           } else {
-            if (computerSelection === 'rock') {
-              return 'You lose! Rock beats Scissors!';
+            if (computer === 'rock') {
+              alert('You lose! Rock beats Scissors!');
+              return -1;
             } else {
-              return 'You win! Scissors beats Paper!';
+              alert('You win! Scissors beats Paper!');
+              return 1;
             }
           }
-        }
+      }
 
-      // execute funciton and display the result
-      console.log(playRound());
+      function game(playerSelection, computerSelection) {
+
+        // would like to explore using a while statement
+        // pass the same arguments to the game function that are needed by the playRound function
+        // pass arguments through to the playRound function
+        // set 5 variables each equal to the result of 5 separate calls to the playRound function
+        let res1 = playRound (playerSelection, computerSelection);
+        let res2 = playRound (playerSelection, computerSelection);
+        let res3 = playRound (playerSelection, computerSelection);
+        let res4 = playRound (playerSelection, computerSelection);
+        let res5 = playRound (playerSelection, computerSelection);
+
+        // from the playRound function, a user win = 1, loss = -1, and tie =0
+        // if the sum of the 5 calls is positive = user wins the game, if negative = computer wins, if 0 = tie game
+        let score = res1 + res2 + res3 + res4 + res5;
+        alert((score > 0) ? 'You win the game!' :
+          (score < 0) ? 'You lost. Try again!' : 'Whoa! 5 ties?! Crazy!');
+      }
+
+      console.log(game(getUserRPS, computerPlay))
+      
     </script>
   </body>
 </html>
