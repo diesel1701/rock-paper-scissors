@@ -33,9 +33,14 @@
       const paperBtn = document.querySelector('#paper');
       const scissorsBtn = document.querySelector('#scissors');
 
-      rockBtn.addEventListener('click', function () {playRound ('rock', computerPlay)});
-      paperBtn.addEventListener('click', function () {playRound ('paper', computerPlay)});
-      scissorsBtn.addEventListener('click', function () {playRound ('scissors', computerPlay)});
+      // added setTimeout of 1 ms because I could not get winAlert() to trigger AFTER the counter incremented to 5
+      rockBtn.addEventListener('click', () => {setTimeout(winAlert, 1)});
+      paperBtn.addEventListener('click', () => {setTimeout(winAlert, 1)});
+      scissorsBtn.addEventListener('click', () => {setTimeout(winAlert, 1)});
+
+      rockBtn.addEventListener('click', () =>  {playRound ('rock', computerPlay)});
+      paperBtn.addEventListener('click', () =>  {playRound ('paper', computerPlay)});
+      scissorsBtn.addEventListener('click', () =>  {playRound ('scissors', computerPlay)});
 
       // I see there are better ways to pull random numbers and apply them to an array of
       // strings, but I wanted to do as much with the skills I have *right now* as possible
@@ -59,6 +64,15 @@
       playerDiv.textContent = playerCounter;
       computerDiv.textContent = computerCounter;
 
+      function winAlert () {
+        if (playerCounter === 5) {
+          console.log('You win the game!');
+        } else if (computerCounter === 5) {
+          console.log('You lost. Try again!');
+        }
+        return;
+      }
+
       function playRound (playerSelection, computerSelection) {
 
         // execute callbacks and set as new local variables to be reused throughout game logic
@@ -68,12 +82,12 @@
         let rndResult = document.querySelector('#rndResult > p');
 
         // enable below console.log's to evaluate/confirm game logic
-        console.log("player: " + player);
-        console.log("computer: " + computer);
+        // console.log("player: " + player);
+        // console.log("computer: " + computer);
 
         // game logic
         // alert player to win, loss, or tie
-        // return score indicator of 1, -1, or 0 (win, loss, or tie)        
+        // add to player or computer counter (whichever won) then update the update the html element to display the new value
         if (computer === player) {
           rndResult.textContent = 'It\'s a tie!';
           return;
@@ -81,71 +95,40 @@
           if (computer === 'paper') {
             rndResult.textContent = 'You lose! Paper beats Rock!';
             computerCounter += 1;
-            playerDiv.textContent = playerCounter;
             computerDiv.textContent = computerCounter;
             return;
             } else {
               rndResult.textContent = 'You win! Rock beats Scissors!';
               playerCounter += 1;
               playerDiv.textContent = playerCounter;
-              computerDiv.textContent = computerCounter;
               return;
               }
           } else if (player === 'paper') {
             if (computer === 'scissors') {
               rndResult.textContent = 'You lose! Scissors beats Paper!';
               computerCounter += 1;
-              playerDiv.textContent = playerCounter;
               computerDiv.textContent = computerCounter;
               return;
               } else {
                 rndResult.textContent = 'You win! Paper beats Rock!';
                 playerCounter += 1;
                 playerDiv.textContent = playerCounter;
-              computerDiv.textContent = computerCounter;
                 return;
                 }
           } else {
             if (computer === 'rock') {
               rndResult.textContent = 'You lose! Rock beats Scissors!';
               computerCounter += 1;
-              playerDiv.textContent = playerCounter;
               computerDiv.textContent = computerCounter;
               return;
             } else {
               rndResult.textContent = 'You win! Scissors beats Paper!';
               playerCounter += 1;
               playerDiv.textContent = playerCounter;
-              computerDiv.textContent = computerCounter;
               return;
             }
           }
-      }
-
-      /* per the 'dom manipulation' lesson - this logic removed
-
-      function game(playerSelection, computerSelection) {
-
-        // would like to explore using a while statement
-        // pass the same arguments to the game function that are needed by the playRound function
-        // pass arguments through to the playRound function
-        // set 5 variables each equal to the result of 5 separate calls to the playRound function
-        let res1 = playRound (playerSelection, computerSelection);
-        let res2 = playRound (playerSelection, computerSelection);
-        let res3 = playRound (playerSelection, computerSelection);
-        let res4 = playRound (playerSelection, computerSelection);
-        let res5 = playRound (playerSelection, computerSelection);
-
-        // from the playRound function, a user win = 1, loss = -1, and tie =0
-        // if the sum of the 5 calls is positive = user wins the game, if negative = computer wins, if 0 = tie game
-        let score = res1 + res2 + res3 + res4 + res5;
-        alert((score > 0) ? 'You win the game!' :
-          (score < 0) ? 'You lost. Try again!' : 'Whoa! 5 ties?! Crazy!');
-      }
-
-      console.log(game(getUserRPS, computerPlay))
-      */
-      
+      }      
     </script>
   </body>
 </html>
