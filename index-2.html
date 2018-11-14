@@ -6,26 +6,42 @@
   </head>
   <body>
     <div class='container'>
-      <!--rock button-->
-      <div class='buttons' id='rock'></div><!--
-        paper button
-      --><div class='buttons' id='paper'></div><!--
-        scissors button
-      --><div class='buttons' id='scissors'></div>
-      <div class='scoreboard'>
-        <!--box containing current player score total-->
-        <div class='score' id='player'>
-          <p></p>
-        </div><!--
-          message displaying result of last round
-        --><div id='rndResult'>
-          <p></p>
-        </div><!--
-          box containing current computer score total
-        --><div class='score' id='computer'>
-          <p></p>
+      <div class='container-scoreboard'>
+        <div class='container-player'>
+          <!--box containing current player score total-->
+          <div class='score player-label'>
+            <p>Player<br>Score</p>
+          </div><!--
+          --><div class='score' id='player'>
+            <p></p>
+          </div>
         </div>
+        <!--box containing current computer score total-->
+        <div class='container-computer'>
+          <div class='score comp-label'>
+            <p>Computer<br>Score</p>
+          </div><!--
+          --><div class='score' id='computer'>
+            <p></p>
+          </div>
+        </div>
+      </div><!--
+        commented out to eliminate inline-block spacing
+      --><div class='container-btn'>
+        <!--rock button-->
+        <div class='buttons' id='rock'></div><!--
+          paper button
+        --><div class='buttons' id='paper'></div><!--
+          scissors button
+        --><div class='buttons' id='scissors'></div>
       </div>
+    </div>  
+    <!--message displaying result of last round-->
+    <div id='rndResult'>
+      <p></p>
+    </div>
+    <div id='gameResult'>
+        <p></p>
     </div>
     <script>
 
@@ -64,11 +80,14 @@
       playerDiv.textContent = playerCounter;
       computerDiv.textContent = computerCounter;
 
+      const gameResult = document.querySelector('#gameResult > p');
+
+
       function winAlert () {
         if (playerCounter === 5) {
-          console.log('You win the game!');
+          gameResult.textContent = 'You win the game!';
         } else if (computerCounter === 5) {
-          console.log('You lost. Try again!');
+          gameResult.textContent = 'You lost the game. Try again!';
         }
         return;
       }

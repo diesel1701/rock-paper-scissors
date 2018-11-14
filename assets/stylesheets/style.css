@@ -52,13 +52,39 @@ table {
 
 .container {
   box-sizing: border-box;
-  height: 400px;
-  width: 1000px;
+  height: fit-content;
+  width: fit-content;
   margin: 200px auto 0;
-  padding: 0 46px 0;
+}
+.container-btn {
+  box-sizing: inherit;
+  height: 300px;
+  width: 1000px;
   text-align: center;
-  background: rgb(195, 204, 230);
-  border-radius: 25px;
+  background: steelblue;
+  border-radius: 0 15px 15px 0;
+}
+.container-scoreboard {
+  box-sizing: inherit;
+  height: 300px;
+  width: 300px;
+  margin: auto;
+  position: relative;
+  border-width: 0 0 1px 1px;
+  border-color: gray;
+  border-style: solid;
+  border-radius: 15px 0 0 15px;
+}
+
+.container-btn, .container-scoreboard {
+  display: inline-block;
+}
+
+.container-player, .container-computer {
+  display: block;
+  box-sizing: inherit;
+  height: 150px;
+  width: 300px;
 }
 
 /* buttons */
@@ -98,25 +124,24 @@ table {
 
 /* result display */
 
-.scoreboard {
-  box-sizing: inherit;
-  height: 100px;
-  width: 100%;
-  padding: 0 100px;
-}
-
-.scoreboard div {
-  display: inline-block;
-}
-
 .score {
+  display: inline-block;
   box-sizing: inherit;
-  height: 100px;
-  width: 100px;
+  height: 150px;
+  width: 150px;
   font-size: 4em;
-  border-radius: 5px;
-  border: 3px solid grey;
+  border-width: 1px 1px 0 0;
+  border-color: gray;
+  border-style: solid;
   position: relative;
+}
+
+.player-label, .comp-label {
+  font-size: 1.5em;
+}
+
+.player-label {
+  border-top-left-radius: 15px;
 }
 
 .score p {
@@ -129,6 +154,21 @@ table {
 #rndResult {
   box-sizing: inherit;
   margin: auto;
-  width: 504px;
+  width: fit-content;
   font-size: 2em;
+}
+
+#rndResult p {
+  text-align: center;
+}
+
+#gameResult {
+  box-sizing: inherit;
+  margin: 30px auto 0;
+  width: fit-content;
+  font-size: 2em;
+}
+
+#gameResult p {
+  text-align: center;
 }
